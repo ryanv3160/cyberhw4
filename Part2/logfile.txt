@@ -1,0 +1,8 @@
+Fri 18 Oct 2019 09:55:01 PM MDT --- No New IPAddress or Open Port ---
+Fri 18 Oct 2019 10:00:02 PM MDT --- No New IPAddress or Open Port ---
+Fri 18 Oct 2019 10:05:01 PM MDT --- New IPAddress or Open Port ---
+192.168.10.156
+Fri 18 Oct 2019 10:10:02 PM MDT --- No New IPAddress or Open Port ---
+Fri 18 Oct 2019 10:15:02 PM MDT --- New IPAddress or Open Port ---
+8080
+Fri 18 Oct 2019 10:20:01 PM MDT --- No New IPAddress or Open Port ---
