@@ -14,5 +14,5 @@ The attached logs, displayed below, show the functionality of the program for pa
 
 Running the file by itself will generate a report for any unknown files and does not include any timing directly. In order to run the program every five minutes, we used the Windows Task Scheduler. Here is a screenshot of the Windows Task Scheduler:
 
-[!Task Scheduler](task-scheduler.png)
+![Task Scheduler](task-scheduler.png)
 
