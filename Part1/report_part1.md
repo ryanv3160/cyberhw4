@@ -11,3 +11,8 @@ The program begins by reading a file of known startup applications using a hashs
 The attached logs, displayed below, show the functionality of the program for part 1. It collects the known objects set to run on startup, and then shows updates the user as to what programs have been added to the specified locations. 
 
 ![Results of startup file addition detector](https://drive.google.com/uc?id=1Mj4GiUwxXzHgTYIUBeguwxzFu_WiwAP5)
+
+Running the file by itself will generate a report for any unknown files and does not include any timing directly. In order to run the program every five minutes, we used the Windows Task Scheduler. Here is a screenshot of the Windows Task Scheduler:
+
+[!Task Scheduler](task-scheduler.png)
+
