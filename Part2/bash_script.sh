@@ -15,7 +15,7 @@ SECONDS=0
 DELAYTIME=300
 
 # Mapfile command to make an array out of the output inside ()
-# Call nmap with option -n to... , option -sn to ..., 
+# Call nmap with option -n to turn off reverse name resolution, "optimization" , option -sn to not scan ports yet, 
 # This is then converted to grepable output with -oG and piped into
 # awk to only capture the ip address's that are labeled up by nmap "Active IP's"
 mapfile -t linesOld < <(nmap -n -sn 192.168.10.1/24 -oG - | awk '/Up$/{print $2}') 
@@ -27,11 +27,13 @@ echo "$(date) Initial scan of network starting"
 for (( i=0; i<${#linesOld[@]}; i++ ))
 do      # Print to previose file the intial scan
 	echo ${linesOld[i]} >> $oldfile
-	# Use nmap with option -n to ... , option -sT to ... ,
-	# option -F to ... , with the IP's found we now want to get the ports open 
+	# Use nmap with option -n , turn off reverse name resolution "optimization".
+	# option -F to Scan most frequent ports "optimization ", with the IP's found we now want to get the ports open 
 	# We pipe the raw port data into the grep fucntion to only get the lines
 	# with port numbers using egrep then append the port numbers to the prev file
 	nmap -n -sT -F ${linesOld[i]} | grep "tcp" | egrep -o '[0-9]+[0-9]' >> $oldfile
+	# This is every single port 1-65536 but takes well over 5 minutes to complete
+	#nmap -n -sT -p- ${linesNew[i]} | grep "tcp" | egrep -o '[0-9]+[0-9]' >> $newfile
 done;
 
 # Print to stdout that we have completed the intitial scan
@@ -54,7 +56,8 @@ while true; do
 	SECONDS=0
 
 	# Mapfile command to make an array out of the output inside ()
-	# Call nmap with option -n to... , option -sn to ..., 
+	# Use nmap with option -n , turn off reverse name resolution "optimization".
+	# Option -sn to not scan ports yet just ip's, 
 	# This is then converted to grepable output with -oG and piped into
 	# awk to only capture the ip address's that are labeled up by nmap "Active IP's"
 	mapfile -t linesNew < <(nmap -n -sn 192.168.10.1/24 -oG - | awk '/Up$/{print $2}')
@@ -63,11 +66,13 @@ while true; do
 	for (( i=0; i<${#linesNew[@]}; i++ ))
 	do 	# Print to comparison file the IP's
 		echo ${linesNew[i]} >> $newfile
-		# Use nmap with option -n to ... , option -sT to ... ,
-		# option -F to ... , with the IP's found we now want to get the ports open 
+		# Use nmap with option -n , turn off reverse name resolution "optimization".
+		# option -F to Scan most frequent ports "optimization ", with the IP's found we now want to get the ports open 
 		# We pipe the raw port data into the grep fucntion to only get the lines
 		# with port numbers using egrep then append the port numbers to the prev file
 		nmap -n -sT -F ${linesNew[i]} | grep "tcp" | egrep -o '[0-9]+[0-9]' >> $newfile
+		# This is every single port 1-65536 but takes well over 5 minutes to complete
+		#nmap -n -sT -p- ${linesNew[i]} | grep "tcp" | egrep -o '[0-9]+[0-9]' >> $newfile
 	done;
 
 	# See if there is a difference in the files 
